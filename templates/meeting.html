@@ -1,0 +1,346 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="#">
+    <link rel="icon" type="image/png" href="./img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Ask online Form">
+    <meta name="description"
+        content="Vanchi is a Material unique admin template built with tiles concept. It comes with Different dashboard layouts, fully responsive HTML pages and, colorful widgets.">
+    <meta name="keywords"
+        content="mobilewebdevelopment,HTML, CSS, JavaScript,Material,js,Forum ,webdesign ,website ,web ,webdesigner ,webdevelopment,Template,admin,dashboard,ebsitedesig,themeym,radwanweb,frontend-with-radwan">
+    <meta name="robots" content="index, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <title>SnapMinutes | Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+    />
+    <link rel="stylesheet" href="{% static 'adminDashboard/css/fontawesome-all.min.css' %}" />
+    <link href="{% static 'adminDashboard/css/materil.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminDashboard/css/custom.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminDashboard/css/responsive.css' %}" rel="stylesheet" />
+
+    <style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 15;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 400px;
+  padding: 15px;
+  background-color:#d0fefe;
+  outline-style: solid;
+  
+}
+
+/* Full-width input fields */
+.form-container input[type=text] {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0 22px 0;
+  border: 3;
+  background: #f1f1f1;
+}
+.form-popup{outline-style: solid;}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+    </style>
+  </head>
+
+  <body>
+ 
+
+    <div class="wrapper">
+      <div
+        class="sidebar"
+        data-color="purple"
+        data-background-color="white"
+        data-image="../assets/img/sidebar-1.jpg"
+      >
+      <div>
+        <a href="{% url 'adminDashboard' %}" class="simple-text logo-normal">
+          <img src="{% static 'adminDashboard/img/logovench.png' %}" alt="logo" />
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'adminDashboard' %}">
+              <img class="mr-2" src="{% static 'adminDashboard/img/ic_view_quilt_24px.png' %}" />
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users' %}">
+              <img class="mr-2" src="{% static 'adminDashboard/img/user.png' %}" />
+              Users
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'speechgen' %}">
+              <img class="mr-2" src="{% static 'adminDashboard/img/Group 1381.png' %}" />
+              Summary Generator
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'adminedit' %}">
+              <img class="mr-2" src="{% static 'adminDashboard/img/Group 1380.png' %}" />
+              Edit
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'attend' %}">
+              <img class="mr-2" src="{% static 'adminDashboard/img/Group1500.png' %}" />
+              Attendance
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'meetings' %}">
+              <img class="mr-2" src="{% static 'adminDashboard/img/Group 1385.png' %}" />
+              Meetings
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin_logout' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/logout.png' %}" />
+                Logout
+              </a>
+            </li>
+        </ul>
+      </div>
+    </div>
+      <div class="main-panel">
+        <!-- Navbar -->
+        
+        <!-- End Navbar -->
+        <div class="content">
+          <!-- Main Content -->
+ <div id="content">
+
+  {% include 'messages.html' %}
+
+  {% block content %}  {% endblock content %}
+<script>
+setTimeout(function(){
+  if ($('#msg').length > 0) {
+  $('#msg').remove();
+  }
+}, 2000)
+</script>
+  
+</div>
+<!-- End of Main Content --> 
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card custom-user-info-card">
+                  <div class="card-header card-header-primary custom-card-height">
+                    <div class="float-left">
+                      <a
+                        ><span class="material-icons custom-material-icon">
+                          person </span
+                        ><span>Meetings</span></a
+                      >
+                    </div>
+                    <div class="float-right">
+                      <div class="user-profile-nav">
+
+                        
+                        <div class="btn-add-group">
+                          <button type="submit" class="btn btn-white" onclick="openForm()">
+                            <span class="material-icons add-icon">
+                              add_box
+                            </span>
+                            Add New
+                          </button>
+
+                          <div class="form-popup" id="myForm">
+                        
+                            <form action="{% url 'admin_meeting_add' %}" class="form-container" method="post">{% csrf_token %}
+                          
+                                <label for="#"><b><h3 style="color: green;">Meeting Details</h3></b></label><br>
+                                
+                              <label for="meetingleader"><b>Meeting Leader</b></label>
+                              <input type="text" name="meetingleader" autocomplete="off" required>
+                
+                              <label for="secretary"><b>Secretary</b></label>
+                              <input type="text" name="secretary" autocomplete="off" required><br>
+                
+                
+                              <label for="date"><b>Date</b></label>
+                              <input type="date" name="date" min="{{ date }}" autocomplete="off" required><br>
+                
+                              <label for="time"><b>Time</b></label>
+                              <input type="time" name="time" min="06:00" max="18:00" required><br>
+                
+                              <label for="place"><b>Place</b></label>
+                              <input type="text" name="place" autocomplete="off" required><br>
+                
+                                
+                              <label for="agenda"><b>Agenda</b></label>
+                              <input type="text" name="agenda" autocomplete="off" required><br>
+
+
+                              <button type="reset" class="btn">Reset</button>
+                              <button type="submit" class="btn btn-primary">
+                                Create
+                              </button>
+                              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                            </form>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body custom-user-table-data">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class="text-danger">
+                          <th style="width: 10%">Meeting Id</th>
+                          <th style="width: 15%">Meeting Leader</th>
+                          <th style="width: 15%">Secretary</th>
+                          <th style="width: 10%">Date</th>
+                          <th style="width: 10%">time</th>
+                          <th style="width: 15%">place</th>
+                          <th style="width: 20%">Agenda</th>
+
+
+                          <th style="width: 25%" class="text-center">Action</th>
+                        </thead>
+                        <tbody>
+                          {% for m in meet %}
+
+                          {% if m.orgid_id == orgid %}
+
+                          <tr>
+                            <td>
+                              {{ m.meetingid }}
+                            </td>
+                            <td>{{ m.meetingleader }}</td>
+
+                            <td>{{ m.secretary }}</td>
+                            <td>{{ m.date }}</td>
+                            <td>{{ m.time }}</td>
+                            <td>{{ m.place }}</td>
+                            <td>{{ m.agenda }}</td>
+                            <td class="text-primary">
+                              <div class="action-btn-group float-right d-flex">
+                                <a href="{% url 'meeting_edit_admin' id=m.meetingid %}">
+                                <button
+                                type="button"
+                                class="
+                                  custom-action-btn
+                                  btn btn-primary
+                                  mr-2
+                                  edit-btn
+                                "
+                              >
+                                Edit
+                              </button></a>
+                              <a href="{% url 'meeting_delete' id=m.meetingid %}">
+                                <button
+                                  type="button"
+                                  class="
+                                    custom-action-btn
+                                    btn btn-danger
+                                    delete-btn
+                                  "       
+                                >
+                                  Delete
+                                </button></a>
+
+                    
+
+                              </div>
+                            </td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
+                         
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed-plugin"></div>
+    <!--   Core JS Files   -->
+    
+
+  
+      <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+
+</script>
+<script src="{% static 'adminLogin/vendor/jquery/jquery-3.2.1.min.js' %}"></script> 
+  </body>
+</html>

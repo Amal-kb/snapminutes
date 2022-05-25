@@ -1,0 +1,321 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="#" />
+    <link rel="icon" type="image/png" href="{% static 'adminDashboard/img/favicon.ico' %}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="title" content="Ask online Form" />
+    <meta
+      name="description"
+      content="Vanchi is a Material unique admin template built with tiles concept. It comes with Different dashboard layouts, fully responsive HTML pages and, colorful widgets."
+    />
+    <meta
+      name="keywords"
+      content="mobilewebdevelopment,HTML, CSS, JavaScript,Material,js,Forum ,webdesign ,website ,web ,webdesigner ,webdevelopment,Template,admin,dashboard,ebsitedesig,themeym,radwanweb,frontend-with-radwan"
+    />
+    <meta name="robots" content="index, nofollow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="English" />
+    <title>SnapMinutes | Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+    />
+    <link rel="stylesheet" href="{% static 'adminDashboard/css/fontawesome-all.min.css' %}" />
+    <link href="{% static 'adminDashboard/css/materil.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminDashboard/css/custom.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminDashboard/css/responsive.css' %}" rel="stylesheet" />
+  </head>
+
+  <body class="">
+
+    <div id="content">
+
+      {% include 'messages.html' %}
+
+      {% block content %}  {% endblock content %}
+  <script>
+    setTimeout(function(){
+      if ($('#msg').length > 0) {
+      $('#msg').remove();
+      }
+    }, 2000)
+    </script>
+      
+    </div>
+    <div class="wrapper">
+      <div
+        class="sidebar"
+        data-color="purple"
+        data-background-color="white"
+        data-image=""
+      >
+        <div >
+          <a href="{% url 'adminDashboard' %}" class="simple-text logo-normal">
+            <img src="{% static 'adminDashboard/img/logovench.png' %}" alt="logo" />
+          </a>
+        </div>
+        <div class="sidebar-wrapper">
+          <ul class="nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'adminDashboard' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/ic_view_quilt_24px.png' %}" />
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/user.png' %}" />
+                Users
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'speechgen' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/Group 1381.png' %}" />
+                summary Generator
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'adminedit' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/Group 1380.png' %}" />
+                Edit
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'attend' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/Group1500.png' %}" />
+                Attendance
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'meetings' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/Group 1385.png' %}" />
+                Meetings
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin_logout' %}">
+                <img class="mr-2" src="{% static 'adminDashboard/img/logout.png' %}" />
+                Logout
+                
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-panel">
+        <!-- Navbar -->
+        <nav
+          class="
+            navbar navbar-expand-lg navbar-transparent navbar-absolute
+            fixed-top
+          "
+        >
+          <div class="container-fluid">
+            <div class="navbar-wrapper">
+              <a class="navbar-brand" href="javascript:;">Dashboard</a>
+            </div>
+           
+            
+          </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              
+            </div>
+
+            <div class="row">
+              <div class="col-lg-8 col-md-12">
+                <div class="card">
+                  <div
+                    class="card-header card-header-primary custom-card-height"
+                  >
+                    <div class="float-left">
+                      <a
+                        ><span class="material-icons custom-material-icon">
+                          person </span
+                        ><span>Users</span></a
+                      >
+                    </div>
+                    <div class="text-right">
+                      <h4 class="card-title">Total Users</h4>
+                      <p class="card-category">{{total2}}</p>
+                    </div>
+                  </div>
+                  <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                      <thead class="text-warning">
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                      </thead>
+                      <tbody>
+                        {% for ur in userreg %}
+
+                        {% if ur.orgid_id == orgid %}
+
+
+                        {% for u in user %}
+
+                        {% if u.email == ur.email %}
+                        <tr>
+                          <td>{{ u.userid}}</td>
+                          <td>{{ u.username}}</td>
+                          <td>{{ u.email}}</td>
+                          <td>{{ u.phone}}</td>
+                        </tr>
+                        {% endif %}
+                          {% endfor %}
+                          {% endif %}
+                          {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12">
+                <div class="custom-account-card card">
+                  <div
+                    class="card-header card-header-warning custom-card-height"
+                  >
+                    <div class="float-left">
+                      <h4>Org&nbsp:&nbsp<b>{{orgname}}</b></h4>
+                    </div>
+                    
+                  </div>
+                  <div class="card-body">
+                    <div
+                      class="progress custom-progress mx-auto"
+                      data-value="80"
+                    >
+                      <span class="progress-left">
+                        <span
+                          class="
+                            progress-bar
+                            account-progress-bar
+                            border-info
+                            bg-gray-white
+                          "
+                        ></span>
+                      </span>
+                      <span class="progress-right">
+                        <span
+                          class="
+                            progress-bar
+                            account-progress-bar
+                            border-info
+                            bg-gray-white
+                          "
+                        ></span>
+                      </span>
+                      <div
+                        class="
+                          progress-value
+                          w-100
+                          h-100
+                          rounded-circle
+                          d-flex
+                          align-items-center
+                          justify-content-center
+                        "
+                      >
+                        <div class="h5 font-weight-bold text-center">
+                          Totatl Meetings<br />{{total}}
+                        </div>
+                      </div>
+                    </div>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card custom-user-info-card">
+                  <div class="card-header card-header-danger">
+                    <div class="float-left">
+                      <a
+                        ><span class="material-icons custom-material-icon">
+                          person </span
+                        ><span>Meetings</span></a
+                      >
+                    </div>
+                    <div class="float-right">
+                      <div class="user-profile-nav">
+                        
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body custom-user-table-data">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class="text-danger">
+                          <th style="width: 10%">Meeting Id</th>
+                          <th style="width: 15%">Meeting Leader</th>
+                          <th style="width: 15%">Secretary</th>
+                          <th style="width: 10%">Date</th>
+                          <th style="width: 10%">Time</th>
+                          <th style="width: 15%">Place</th>
+                          <th style="width: 20%">Agenda</th>
+                          
+                          <th style="width: 15%" class="text-center">Action</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            {% for m in meet %}
+
+                            {% if m.orgid_id == orgid %}
+                            <td>
+                              {{m.meetingid}}
+                            </td>
+                            <td>{{m.meetingleader}}</td>
+                            <td>{{m.secretary}}</td>
+                            <td>{{m.date}}</td>
+                            <td>{{m.time}}</td>
+                            <td>{{m.place}}</td>
+                            <td>{{m.agenda}}</td>
+                           
+                            <td class="text-primary">
+                              <div class="action-btn-group float-right d-flex">
+                                <a href="{% url 'meeting_view_admin' id=m.meetingid %}">
+                                <button
+                                  type="button"
+                                  class="
+                                    custom-action-btn
+                                    btn btn-primary
+                                    mr-2
+                                    edit-btn
+                                  "
+                                  href="{% url 'meeting_view_admin' id=m.meetingid %}"
+                                >
+                                  View
+                                </button></a>
+                               
+                              </div>
+                            </td>
+                          </tr>
+                          {% endif %}
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

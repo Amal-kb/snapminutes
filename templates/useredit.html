@@ -1,0 +1,180 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="#" />
+    <link rel="icon" type="image/png" href="./img/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="title" content="Ask online Form" />
+    <meta
+      name="description"
+      content="Vanchi is a Material unique admin template built with tiles concept. It comes with Different dashboard layouts, fully responsive HTML pages and, colorful widgets."
+    />
+    <meta
+      name="keywords"
+      content="mobilewebdevelopment,HTML, CSS, JavaScript,Material,js,Forum ,webdesign ,website ,web ,webdesigner ,webdevelopment,Template,admin,dashboard,ebsitedesig,themeym,radwanweb,frontend-with-radwan"
+    />
+    <meta name="robots" content="index, nofollow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="English" />
+    <title>SnapMinutes | Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+    />
+    <link rel="stylesheet" href="{% static 'adminDashboard/css/fontawesome-all.min.css' %}" />
+    <link href="{% static 'adminDashboard/css/materil.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminDashboard/css/custom.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminDashboard/css/responsive.css' %}" rel="stylesheet" />
+  </head>
+
+  <body class="">
+    <div id="content">
+
+        {% include 'messages.html' %}
+  
+        {% block content %}  {% endblock content %}
+    <script>
+      setTimeout(function(){
+        if ($('#msg').length > 0) {
+        $('#msg').remove();
+        }
+      }, 2000)
+      </script>
+        
+      </div>
+      <div class="wrapper">
+        <div
+          class="sidebar"
+          data-color="purple"
+          data-background-color="white"
+          data-image=""
+        >
+        <div>
+            <a href="{% url 'adminDashboard' %}" class="simple-text logo-normal">
+              <img src="{% static 'adminDashboard/img/logovench.png' %}" alt="logo" />
+            </a>
+          </div>
+          <div class="sidebar-wrapper">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'userdashboard' %}">
+                  <img class="mr-2" src="{% static 'adminDashboard/img/ic_view_quilt_24px.png' %}" />
+                  Dashboard
+                </a>
+              </li>
+         
+         
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'useredit' %}">
+                  <img class="mr-2" src="{% static 'adminDashboard/img/Group 1380.png' %}" />
+                  Add Meeting
+                </a>
+              </li>
+           
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin_logout' %}">
+                  <img class="mr-2" src="{% static 'adminDashboard/img/Group 1382.png' %}" />
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="main-panel">
+        <!-- Navbar -->
+        
+        <!-- End Navbar -->
+        <div class="content">
+          
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <div class="float-left">
+                      <a
+                        ><span>Update Meeting</span></a
+                      >
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <form action="{% url 'add_meeting_user' %}" method="post">{% csrf_token %}
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label >Meeting Leader</label>
+                            <input type="text" class="form-control" name="meetingleader"  />
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                              <label >Secretary</label>
+                              <input type="text" class="form-control" name="secretary" />
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label >Date</label>
+                              <input type="date" name="date" />
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label >Time</label>
+                              <input type="time" name="time"  />
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label >Place</label>
+                              <input type="text" class="form-control" name="place" />
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label >Agenda</label>
+                              <input type="text" class="form-control" name="agenda"  />
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label >Organization id</label>
+                              <input type="text" class="form-control" name="id"  />
+                            </div>
+                          </div>
+                         
+                      <div class="row mt-5">
+                        <div class="col-md-12 profile-save-btn">
+                          <button type="submit" class="btn btn-primary">
+                            Create
+                          </button>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed-plugin"></div>
+    
+
+    <script>
+      
+
+
+    </script>
+  </body>
+</html>
