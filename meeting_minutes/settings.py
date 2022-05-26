@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import psycopg2.extensions
 
 import user_interface
 
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -82,17 +84,19 @@ WSGI_APPLICATION = 'meeting_minutes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'meet',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        'PORT':'3306',
-        'OPTIONS':{
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd4kuk9nenkoeav',
+        'USER':'zkochfzljtohfv',
+        'PASSWORD':'0fbcde56d3bce8c3a0bc56acfb836cea3961550ec5376b6d26eaf68260c0ef3b',
+        'HOST':'ec2-52-70-186-184.compute-1.amazonaws.com',
+        'PORT':'5432',
+        'OPTIONS': {
+        'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
+    },
+        
     },
 }
-}
+
 
 AUTH_USER_MODEL= "user_interface.User"
 
@@ -128,16 +132,24 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/static/','/templates/',
-]
+#STATICFILES_DIRS = [
+#    BASE_DIR / "static",
+#    '/static/','/templates/',
+#]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

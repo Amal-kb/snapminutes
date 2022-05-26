@@ -8,6 +8,7 @@ django = "==3.2.6"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+gunicorn = "*"
 
 [dev-packages]
 
